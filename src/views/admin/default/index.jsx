@@ -13,7 +13,8 @@ import {
   // columnsDataDonor,
   // columnsDataComplex
 } from "./variables/columnsData";
-
+import SubscriptionTable from "components/Stripe_paypal/SubscriptionTable";
+import Subscription from "components/Stripe_paypal/Subscription";
 import Widget from "components/widget/Widget";
 // import DonorsTable from "views/admin/default/components/donorsTable";
 // import ComplexTable from "views/admin/default/components/ComplexTable";
@@ -395,7 +396,10 @@ const Dashboard = () => {
         </div> */}
       </div>
     </div>
+     <SubscriptionTable/>
+     <Subscription/>
     </Admin>
+   
   );
 };
 
