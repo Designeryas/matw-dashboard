@@ -138,7 +138,7 @@ const MultiProductsTable = (props) => {
                           } else if (cell.column.Header === "Amount") {
                             data = (
                               <p className="text-sm text-left font-medium text-navy-700 pr-1 lowercase- overflow-hidden">
-                                {cell.value ? cell.value.toFixed(2) : <span className="text-base font-normal text-stone-400">NULL</span>}
+                                {cell.value ? Number(cell.value).toFixed(2) : <span className="text-base font-normal text-stone-400">NULL</span>}
                               </p>
                             );
                           } else if (cell.column.Header === "Quantity") {
@@ -150,7 +150,7 @@ const MultiProductsTable = (props) => {
                           } else if (cell.column.Header === "Sub Total") {
                             data = (
                               <p className="text-sm text-left font-medium text-navy-700">
-                                {cell.value ? cell.value.toFixed(2) : <span className="text-md font-normal text-stone-400">1</span>}
+                                {cell.value ? Number(cell.value).toFixed(2) : <span className="text-md font-normal text-stone-400">1</span>}
                               </p>
                             );
                           } else if (cell.column.Header === "Tax") {

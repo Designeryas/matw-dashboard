@@ -19,6 +19,10 @@ function getMultiQurbanProducts(info) {
 function sendReceipt(info) {
   return axios.post(`${Base}/checkout/stripe/send-receipt`,info);
 }
+function getSubscriptions() {
+  // return axios.get(`${Base}/checkout/stripe/subscriptions`);
+  return axios.get(`http://127.0.0.1:8000/subscriptions`);
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getFailedTrx,
@@ -27,4 +31,5 @@ export default {
   getAllTrxs,
   getMultiProducts,
   getMultiQurbanProducts,
+  getSubscriptions,
 };

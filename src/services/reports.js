@@ -16,6 +16,9 @@ function monthlySubscriptionTypeReport() {
 function monthlyHostTypeReport() {
   return axios.post(`${Base}/checkout/reports/monthly-host-type-count`);
 }
+function monthlyHostTransactionsReport() {
+  return axios.post(`${Base}/checkout/reports/monthly-host-transactions`);
+}
 function monthlyProductPurchaseReport(product_id) {
   return axios.post(`${Base}/checkout/reports/monthly-product-purchase-count`,product_id);
 }
@@ -41,4 +44,5 @@ export default {
   dailyQurbanProductsPurchaseReport,
   dailyQurbanProductsTransactionTotalReport,
   zohoReport,
+  monthlyHostTransactionsReport,
 };

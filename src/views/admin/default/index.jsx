@@ -13,8 +13,8 @@ import {
   // columnsDataDonor,
   // columnsDataComplex
 } from "./variables/columnsData";
-import SubscriptionTable from "components/Stripe_paypal/SubscriptionTable";
-import Subscription from "components/Stripe_paypal/Subscription";
+// import SubscriptionTable from "components/Stripe_paypal/SubscriptionTable";
+// import Subscription from "components/Stripe_paypal/Subscription";
 import Widget from "components/widget/Widget";
 // import DonorsTable from "views/admin/default/components/donorsTable";
 // import ComplexTable from "views/admin/default/components/ComplexTable";
@@ -168,6 +168,7 @@ const Dashboard = () => {
     if (searchs && searchs.referal) { tempSearch.referal = searchs.referal; }
     if (searchs && searchs.host) { tempSearch.host = searchs.host; }
     if (searchs && searchs.mode) { tempSearch.mode = searchs.mode; }
+    if (searchs && searchs.payment_gateway) { tempSearch.payment_gateway = searchs.payment_gateway; }
     if (searchs && searchs.email) { tempSearch.email = searchs.email; }
     if (searchs && searchs.phone) { tempSearch.phone = searchs.phone; }
     if (moment(tempSearch.from).diff(moment(tempSearch.to), 'days') > 0) { tempSearch.to = tempSearch.from }
@@ -396,10 +397,10 @@ const Dashboard = () => {
         </div> */}
       </div>
     </div>
-     <SubscriptionTable/>
-     <Subscription/>
+     {/* <SubscriptionTable/>
+     <Subscription/> */}
     </Admin>
-   
+
   );
 };
 

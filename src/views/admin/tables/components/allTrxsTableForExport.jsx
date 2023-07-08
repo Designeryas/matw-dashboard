@@ -209,7 +209,7 @@ const AllTrxsTableForExport = (props) => {
                         } else if (cell.column.Header === "Rate") {
                           data = (
                             <p className="text-xs text-left font-medium text-navy-700 pr-1 lowercase overflow-hidden">
-                              {cell.value ? cell.value.toFixed(2) : <span className="text-base font-normal text-stone-400">NULL</span>}
+                              {cell.value ? Number(cell.value).toFixed(2) : <span className="text-base font-normal text-stone-400">NULL</span>}
                             </p>
                           );
                         } else if (cell.column.Header === "Amount") {

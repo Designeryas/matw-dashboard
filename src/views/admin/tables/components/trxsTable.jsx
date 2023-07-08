@@ -45,6 +45,11 @@ const TrxsTable = (props) => {
     { lable: 'Payment', value: 'payment' },
     { lable: 'Subscription', value: 'subscription' },
   ];
+  const paymentGatewayTypes = [
+    { lable: 'All', value: 'All' },
+    { lable: 'Stripe', value: 'Stripe' },
+    { lable: 'Paypal', value: 'Paypal' },
+  ];
   const hosts = [
     { lable: 'All', value: 'All' },
     { lable: 'matwproject.org', value: 'matwproject.org' },
@@ -81,6 +86,7 @@ const TrxsTable = (props) => {
     per_page: 10,
     status: 'Paid',
     mode: '',
+    payment_gateway: '',
     referal: '',
     host: '',
     email: '',
@@ -136,6 +142,7 @@ const TrxsTable = (props) => {
       referal: '',
       host: '',
       mode: '',
+      payment_gateway: '',
       email: '',
       phone: '',
       from: new Date().toISOString().split('T')[0],
@@ -340,7 +347,7 @@ const TrxsTable = (props) => {
                 </select>
               </div>
             </div>
-            <div className="basis-full sm:basis-1/2 md:basis-1/4 3xl:basis-1/6 mt-2 3xl:mt-0 px-1">
+            <div className="basis-full sm:basis-1/2 md:basis-1/4 3xl:basis-1/6 mt-2 3xl:mt-0- px-1">
               <div className="flex flex-col justify-start items-start w-full">
                 <label className="text-sm text-stone-400" htmlFor="status">Mode</label>
                 <select
@@ -352,6 +359,25 @@ const TrxsTable = (props) => {
                   }}
                 >
                   {modeTypes.map(type => (
+                    <option key={type.lable} value={type.value} className='cursor-pointer'>
+                      {type.lable}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="basis-full sm:basis-1/2 md:basis-1/4 3xl:basis-1/6 mt-2 3xl:mt-0- px-1">
+              <div className="flex flex-col justify-start items-start w-full">
+                <label className="text-sm text-stone-400" htmlFor="status">Payment Gateway</label>
+                <select
+                  name="payment_gateway"
+                  value={searchItems.payment_gateway}
+                  className='cursor-pointer focus:outline-none border border-stone-300 rounded px-2 text-sm h-[42px] w-full'
+                  onChange={e => {
+                    handleSearch('payment_gateway', e.target.value === 'All' ? '' : e.target.value);
+                  }}
+                >
+                  {paymentGatewayTypes.map(type => (
                     <option key={type.lable} value={type.value} className='cursor-pointer'>
                       {type.lable}
                     </option>
@@ -415,7 +441,7 @@ const TrxsTable = (props) => {
                 <col span="1" className="w-[12%]" />
                 <col span="1" className="w-[12%]" />
                 <col span="1" className="w-[9%]" />
-                <col span="1" className="w-[7%]" />
+                <col span="1" className="w-[21%]" />
               </colgroup>
               <thead>
                 {headerGroups.map((headerGroup, index) => (
@@ -446,7 +472,7 @@ const TrxsTable = (props) => {
                   let orderId = row.original && row.original.order_id;
                   prepareRow(row);
                   return (
-                    <tr {...row.getRowProps()} key={rowIndex} className={`${rowIndex % 2 === 0 ? 'bg-stone-100' : ''}`}>
+                    <tr {...row.getRowProps()} key={rowIndex} className={`${rowIndex % 2 === 0 ? 'bg-gray-50' : ''} transition-all duration-200 hover:bg-gray-100`}>
                       {row.cells.map((cell, index) => {
                         let data = "";
                         if (cell.column.Header === "Name") {
@@ -478,7 +504,7 @@ const TrxsTable = (props) => {
                         } else if (cell.column.Header === "Rate") {
                           data = (
                             <p className="text-xs text-left font-medium text-navy-700 pr-1 lowercase overflow-hidden">
-                              {cell.value ? cell.value.toFixed(2) : <span className="text-base font-normal text-stone-400">NULL</span>}
+                              {cell.value ? Number(cell.value).toFixed(2) : <span className="text-base font-normal text-stone-400">NULL</span>}
                             </p>
                           );
                         } else if (cell.column.Header === "Amount") {
@@ -557,7 +583,7 @@ const TrxsTable = (props) => {
                           );
                         } else if (cell.column.Header === "Actions") {
                           data = (
-                            <div className="flex">
+                            <div className="flex text-white">
                               {isPaid && <>
                                 <a href={receipt_url} target='_blank' rel="noreferrer" className="bg-[#49acea] h-9 px-3 text-xs flex justify-center items-center mr-2 text-white rounded min-w-[100px] transition-all duration-200 hover:bg-[#db346e]">View Receipt</a>
                                 <button

@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import services from 'services';
 
 const SubscriptionTable = () => {
   const [subscriptionData, setSubscriptionData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [subscriptionsPerPage] = useState(5);
 
-  const fetchSubscriptionData = () => {
-    axios
-      .get('http://127.0.0.1:8000/subscriptions/data')
-      .then(response => {
-        setSubscriptionData(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  // const fetchSubscriptionData = () => {
+  //   axios
+  //     .get('http://127.0.0.1:8000/subscriptions/data')
+  //     .then(response => {
+  //       setSubscriptionData(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // };
+
+  const getSubscriptions = async () => {
+    // setIsLoading(true);
+    try {
+      const response = await services.getSubscriptions();
+      console.log('response get getSubscriptions', response);
+      setSubscriptionData(response.data);
+      console.log('response get getMultiProducts', response.data.products);
+      // setIsLoading(false)
+    } catch (error) {
+      // setIsLoading(false)
+      console.error('error========', error);
+    }
   };
 
   useEffect(() => {
-    fetchSubscriptionData();
-    const interval = setInterval(fetchSubscriptionData, 5000);
-
+    getSubscriptions();
+    const interval = setInterval(getSubscriptions, 5000);
     return () => {
       clearInterval(interval);
     };

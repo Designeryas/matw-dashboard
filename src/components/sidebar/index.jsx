@@ -32,7 +32,7 @@ const Sidebar = ({ open, onClose, onMinimize }) => {
       </div>
       <div className="mt-[58px] mb-5 h-px bg-gray-300 dark:bg-white/30" />
       {/* Nav item */}
-      <ul className="mb-auto pt-1">
+      <ul className="mb-auto pt-1 pl-0">
         <Links routes={routes} isMinimize={isMinimize} />
       </ul>
       <div className="flex justify-end px-4">

@@ -1,10 +1,8 @@
-//http://127.0.0.1:8000/subscriptions
-
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import Table from 'react-bootstrap/Table';
 import Pagination from 'react-bootstrap/Pagination';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import services from 'services';
 
 const SubscriptionsTable = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -12,20 +10,32 @@ const SubscriptionsTable = () => {
   const [subscriptionsPerPage] = useState(5);
 
   useEffect(() => {
-    fetchSubscriptions();
+    getSubscriptions();
   }, []);
 
-  const fetchSubscriptions = () => {
-    axios
-      .get('http://127.0.0.1:8000/subscriptions') // Replace with the actual route URL for fetching subscriptions
-      .then(response => {
-        setSubscriptions(response.data);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+  // const fetchSubscriptions = () => {
+  //   axios
+  //     .get('http://127.0.0.1:8000/subscriptions') // Replace with the actual route URL for fetching subscriptions
+  //     .then(response => {
+  //       setSubscriptions(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // };
+  const getSubscriptions = async () => {
+    // setIsLoading(true);
+    try {
+      const response = await services.getSubscriptions();
+      console.log('response get getSubscriptions', response);
+      setSubscriptions(response.data);
+      console.log('response get getMultiProducts', response.data.products);
+      // setIsLoading(false)
+    } catch (error) {
+      // setIsLoading(false)
+      console.error('error========', error);
+    }
   };
-
   const indexOfLastSubscription = currentPage * subscriptionsPerPage;
   const indexOfFirstSubscription = indexOfLastSubscription - subscriptionsPerPage;
   const currentSubscriptions = subscriptions.slice(indexOfFirstSubscription, indexOfLastSubscription);
