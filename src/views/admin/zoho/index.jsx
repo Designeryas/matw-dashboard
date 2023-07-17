@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Admin from "layouts/admin";
 import moment from "moment";
 import services from "services";
-import ZohoProducts2 from "./components/ZohoProducts2";
+import ZohoProducts from "./components/ZohoProducts";
+// import ZohoProducts2 from "./components/ZohoProducts2";
 
 const ZohoReports = () => {
   /* ----------------------------- Start variables ---------------------------- */
@@ -241,7 +242,7 @@ const ZohoReports = () => {
     <Admin>
       <div className="mt-5 grid grid-cols-2 gap-5 overflow-x-scroll lg:overflow-hidden">
         <div className="col-span-2">
-          <ZohoProducts2
+          <ZohoProducts
               columnsData={columnsDataTrxs}
               tableData={allTrxs}
               isLoading={isLoading}

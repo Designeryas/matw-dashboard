@@ -133,7 +133,7 @@ const ZohoProducts2 = (props) => {
                 Ready For Export Excel
               </button>
             <table
-              className="w-full min-w-max- 2xl:table-fixed hidden"
+              className="w-full min-w-max- 2xl:table-fixed hidden-"
               color="gray-500"
               mb="24px"
               ref={tableRef}

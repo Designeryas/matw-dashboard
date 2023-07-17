@@ -23,6 +23,7 @@ const TrxsTable = (props) => {
     lastPage,
     pageSize,
     isLoading,
+    currentSearches,
     onSearchItems,
     onDownloadFile,
     onShowMultiProducts
@@ -240,6 +241,10 @@ const TrxsTable = (props) => {
     !isLoading && setLoadingReset(isLoading)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])
+  useEffect(() => {
+    currentSearches && setSearchItems(currentSearches)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSearches])
   /* -------------------------------------------------------------------------- */
   return (
     <Card extra={"w-full h-full sm:overflow-auto px-2 md:px-4 2xl:px-6"}>

@@ -40,6 +40,7 @@ const Dashboard = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [searchedItems, setSearchedItems] = useState();
+  const [currentSearchedItems, setCurrentSearchedItems] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -251,6 +252,12 @@ const Dashboard = () => {
     getMultiProducts(id,methodType)
     console.log("id",id, method,currency)
   }
+  const handleShowMainTable = () => {
+    setShowMultiProducts(false);
+    setCurrentSearchedItems(searchedItems);
+    searchedItems && setCurrentPage(1);
+    searchedItems && getAllTransactions(searchedItems);
+  }
   /* -------------------------------------------------------------------------- */
 
   /* ------------------------------- Start hooks ------------------------------ */
@@ -343,7 +350,7 @@ const Dashboard = () => {
               pageSize={pageSize}
               totalTrxs={totalTrxs}
               currency={multiProductsCurrency}
-              onBackToHome={() => setShowMultiProducts(false)}
+              onBackToHome={() => handleShowMainTable()}
             />
             : <TrxsTable
               columnsData={columnsDataTrxs}
@@ -353,6 +360,7 @@ const Dashboard = () => {
               pageSize={pageSize}
               isLoading={isLoading}
               totalTrxs={totalTrxs}
+              currentSearches={currentSearchedItems}
               onShowMultiProducts={(id,method,currency) => handleShowMultiProducs(id,method,currency)}
               onSearchItems={(e) => setSearchedItems(e)}
               onDownloadFile={() => setIsDownloading(true)}
